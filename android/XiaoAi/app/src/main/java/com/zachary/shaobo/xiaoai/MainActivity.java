@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             //update hardware
         } else if (id == R.id.nav_share) {
-
+            startActivity(new Intent(this,NewVersionActivity.class));
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(this,BandDeviceActivity.class));
         }

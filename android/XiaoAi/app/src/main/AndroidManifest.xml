@@ -3,9 +3,10 @@
     package="com.zachary.shaobo.xiaoai">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,10 +29,13 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-
         <activity
             android:name=".BandDeviceActivity"
             android:label="@string/title_activity_band_device"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewVersionActivity"
+            android:label="@string/title_activity_new_version"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

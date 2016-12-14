@@ -2,7 +2,6 @@ package com.zachary.shaobo.xiaoai.services;
 /**
  * Created by shaobo on 2016/12/7.
  */
-import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
@@ -13,12 +12,7 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Binder;
-import android.os.IBinder;
 import android.util.Log;
-
-import com.zachary.shaobo.xiaoai.storage.Storage;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +20,7 @@ import java.util.UUID;
 /**
  * Service for connect device through bluethooth
  */
-public class BluetoothService extends Service {
+public class BluetoothService{
     private final static String TAG = BluetoothService.class.getSimpleName();
 
     private BluetoothManager mBluetoothManager;
@@ -112,46 +106,14 @@ public class BluetoothService extends Service {
         }
     };
 
-    public class LocalBinder extends Binder {
-        BluetoothService getService() {
-            return BluetoothService.this;
-        }
-    }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
-        initialize();
-        try{
-            String address = Storage.getDevicesAddress();
-            connect(address);
-        }catch (Exception e){
-
-        }
-        return START_STICKY;
-    }
-
-    @Override
-    public void onDestroy(){
-        close();
-        super.onDestroy();
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return mBinder;
-    }
-
-    @Override
-    public boolean onUnbind(Intent intent) {
-        return super.onUnbind(intent);
-    }
-
-    private final IBinder mBinder = new LocalBinder();
-
-    public boolean initialize() {
+    /**
+     * @return
+     */
+    public boolean initialize(Context cxt) {
         //get BluetoothManager and init adapter
         if (mBluetoothManager == null) {
-            mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+            mBluetoothManager = (BluetoothManager) cxt.getSystemService(Context.BLUETOOTH_SERVICE);
             if (mBluetoothManager == null) {
                 Log.e(TAG, "Unable to initialize BluetoothManager.");
                 return false;
@@ -165,7 +127,11 @@ public class BluetoothService extends Service {
         return true;
     }
 
-    public boolean connect(final String address) {
+    /**
+     * @param address
+     * @return
+     */
+    public boolean connect(Context context, final String address) {
         if (mBluetoothAdapter == null || address == null) {
             Log.w(TAG,
                     "BluetoothAdapter not initialized or unspecified address.");
@@ -194,7 +160,7 @@ public class BluetoothService extends Service {
         // We want to directly connect to the device, so we are setting the
         // autoConnect
         // parameter to false.
-        mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
+        mBluetoothGatt = device.connectGatt(context, false, mGattCallback);
         Log.d(TAG, "Trying to create a new connection.");
         mBluetoothDeviceAddress = address;
         mConnectionState = STATE_CONNECTING;

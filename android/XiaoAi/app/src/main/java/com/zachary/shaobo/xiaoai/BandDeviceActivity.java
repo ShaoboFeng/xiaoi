@@ -19,6 +19,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.zachary.shaobo.xiaoai.storage.DeviceStorage;
+
 public class BandDeviceActivity extends AppCompatActivity {
     private  final String TAG = MainActivity.class.getSimpleName();
     private BluetoothAdapter mBluetoothAdapter = null;
@@ -33,6 +35,8 @@ public class BandDeviceActivity extends AppCompatActivity {
             Log.d(TAG, "Device service UUIDs: " + device.getUuids());
             if("CC41-A".equals(device.getName())){
                 //save devices detail info
+                DeviceStorage deviceStorage = DeviceStorage.getInstance();
+                deviceStorage.bondDevice(device.getAddress());
                 mBluetoothLeScanner.stopScan(mLeScanCallback);
             }
         }
