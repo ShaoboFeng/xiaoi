@@ -1,15 +1,36 @@
 package com.zachary.shaobo.xiaoai;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.zachary.shaobo.xiaoai.services.XiaoAiService;
 import com.zachary.shaobo.xiaoai.storage.DeviceStorage;
 
 public class NewVersionActivity extends AppCompatActivity {
+
+    XiaoAiService msgService = null;
+    ServiceConnection conn = new ServiceConnection() {
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            msgService = ((XiaoAiService.LocalBinder)service).getService();
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +49,8 @@ public class NewVersionActivity extends AppCompatActivity {
                     Snackbar.make(view, "please bong device first", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 }
-
+                Intent intent = new Intent(XiaoAiService.class);
+                bindService(intent,conn, Context.BIND_AUTO_CREATE);
                 /*notify service download hardware from bluetooth*/
                 /*LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this);
                 localBroadcastManager.registerReceiver(mBroadcastReceiver, intentFilter);

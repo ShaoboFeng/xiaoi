@@ -29,7 +29,7 @@ public class XiaoAiService extends Service {
     private final IBinder mBinder = new LocalBinder();
 
     public class LocalBinder extends Binder {
-        XiaoAiService getService() {
+        public XiaoAiService getService() {
             return XiaoAiService.this;
         }
     }
