@@ -81,4 +81,5 @@
     <string name="title_activity_band_device">BandDeviceActivity</string>
     <string name="title_activity_new_version">NewVersionActivity</string>
     <string name="buttion_text_newversion">确认更新</string>
+    <string name="title_activity_devices_manager">SmartHome</string>
 </resources>

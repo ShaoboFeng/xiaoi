@@ -1,8 +1,6 @@
 package com.zachary.shaobo.xiaoai;
 
 import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -49,8 +47,8 @@ public class NewVersionActivity extends AppCompatActivity {
                     Snackbar.make(view, "please bong device first", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 }
-                Intent intent = new Intent(XiaoAiService.class);
-                bindService(intent,conn, Context.BIND_AUTO_CREATE);
+                //Intent intent = new Intent(XiaoAiService.class);
+                //bindService(intent,conn, Context.BIND_AUTO_CREATE);
                 /*notify service download hardware from bluetooth*/
                 /*LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this);
                 localBroadcastManager.registerReceiver(mBroadcastReceiver, intentFilter);
