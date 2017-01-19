@@ -44,18 +44,8 @@ typedef  void (*pFunction)(void);
 #define CONVERTHEX_alpha(c)  (IS_AF(c) ? (c - 'A'+10) : (c - 'a'+10))
 #define CONVERTHEX(c)   (IS_09(c) ? (c - '0') : CONVERTHEX_alpha(c))
 
-#define SerialPutString(x) Serial_PutString((uint8_t*)(x))
 
-
-/* º¯ÊýÉùÃ÷ ------------------------------------------------------------------*/
-void Int2Str(uint8_t* str,int32_t intnum);
-uint32_t Str2Int(uint8_t *inputstr,int32_t *intnum);
-uint32_t GetIntegerInput(int32_t * num);
-uint32_t SerialKeyPressed(uint8_t *key);
-uint8_t GetKey(void);
-void SerialPutChar(uint8_t c);
-void Serial_PutString(uint8_t *s);
-void GetInputString(uint8_t * buffP);
+/*---------------------------------------------*/
 uint32_t FLASH_PagesMask(__IO uint32_t Size);
 void FLASH_DisableWriteProtectionPages(void);
 void Main_Menu(void);

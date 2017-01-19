@@ -139,8 +139,7 @@ void PendSV_Handler(void)
 *******************************************************************************/
 void SysTick_Handler(void)
 {
-	TimingDelay--;
-	SysMsCnt++;  
+
 }
 
 /*******************************************************************************
@@ -508,12 +507,7 @@ void TIM2_IRQHandler(void)
 *******************************************************************************/
 void TIM3_IRQHandler(void)
 {
-	 if(TIM_GetITStatus(TIM3,TIM_IT_Update) == SET) 
-	 {
-		  SysMsCnt++;
 
-		  TIM_ClearITPendingBit(TIM3,TIM_FLAG_Update);
-	 }
 }
 
 /*******************************************************************************
@@ -620,15 +614,6 @@ void USART1_IRQHandler(void)
 		USART_ClearITPendingBit( USART1, USART_IT_RXNE );// Clear the USART  Receive interrup/
 	}
 */
-}
-
-/*******************************************************************************
-* Function Name  : USART2_IRQHandler
-* Description    : This function handles USART2 global interrupt request.
-*******************************************************************************/
-void USART2_IRQHandler(void)
-{
-
 }
 
 /*******************************************************************************
